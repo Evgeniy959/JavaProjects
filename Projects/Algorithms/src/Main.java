@@ -3,6 +3,26 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
+        String s1 = "level";
+        String s2 = "cool";
+        String s3 = "Madam";
+        String s4 = "Now, sir, a war is won!";
+        /*boolean b1 = PalindromeTest.validPalindrome(s1);
+        boolean b2 = PalindromeTest.validPalindrome(s2);
+        boolean b3 = PalindromeTest.validPalindrome(s3);
+        boolean b4 = PalindromeTest.validPalindrome(s4);
+        System.out.println("is " + s1 + " a palindrome? " + b1);
+        System.out.println("is " + s2 + " a palindrome? " + b2);
+        System.out.println("is " + s3 + " a palindrome? " + b3);
+        System.out.println("is " + s4 + " a palindrome? " + b4);*/
+        PalindromeTest.validPalindrome2(s1);
+        PalindromeTest.validPalindrome2(s2);
+        PalindromeTest.validPalindrome2(s3);
+        PalindromeTest.validPalindrome2(s4);
+        PalindromeTest.validPalindromeIgnorePunctuation(s1);
+        PalindromeTest.validPalindromeIgnorePunctuation(s2);
+        PalindromeTest.validPalindromeIgnorePunctuation(s3);
+        PalindromeTest.validPalindromeIgnorePunctuation(s4);
         //Сортировка подсчётом
 
         Character[] chars = {'f','i','u','e','w', 'w', '.', 'a','m','a'};
@@ -79,6 +99,41 @@ public class Main {
             if (IsPrimeNumber(p))
             System.out.print(p + " ");
         }
+        System.out.println();
+        //Для коллекции длиной N установи верную последовательность шагов алгоритма сортировки выбором на псевдокоде.
+        int[] arr = {5,4,3,2,1,6,2}; // This is my array
+        int min1 = 0;
+
+        for(int i = 0;i<arr.length;i++)
+        {
+            //Assume first element is min
+            min1 = i;
+            for(int m = i + 1;m<arr.length;m++)
+            {
+                if(arr[m] < arr[min1]) { min1 = m;}
+            }
+            int temp = arr[i];
+            arr[i] = arr[min1];
+            arr[min1] = temp;
+            System.out.print(arr[i]);//I print the in ascending order
+        }
+
+        //2 варинат
+        /*public static <T extends Comparable<? super T>>
+        void sort(T[] array) {
+            for (int i = 0; i < array.length - 1; ++i) {
+                int minPos = i;
+                for (int j = i + 1; j < array.length; ++j) {
+                    if (array[j].compareTo(array[minPos]) < 0) {
+                        minPos = j;
+                    }
+                }
+                T saveValue = array[minPos];
+                array[minPos] = array[i];
+                array[i] = saveValue;
+            }
+        }*/
+
 
     }
     static boolean IsPrimeNumber(int n){
