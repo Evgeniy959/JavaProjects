@@ -17,15 +17,23 @@ public class Main {
                 sb.append(word).append(" ");
         }
         String str = sb.toString();
-        char[] chars = str.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == '-'){
-                char temp = chars[i-1];
-                chars[i-1] = chars[i+1];
-                chars[i+1] = temp;
+//        char[] chars = str.toCharArray();
+//        for (int i = 0; i < chars.length; i++) {
+//            if (chars[i] == '-'){
+//                char temp = chars[i-1];
+//                chars[i-1] = chars[i+1];
+//                chars[i+1] = temp;
+//            }
+//        }
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '-'){
+                char temp = str.charAt(i-1);
+                str.charAt(i-1) = str.charAt(i+1);
+                str.charAt(i+1) = temp;
             }
         }
-        str = String.valueOf(chars).replace("-", "").replace("+", "!");
+        //str = String.valueOf(chars).replace("-", "").replace("+", "!");
+        str = str.replace("-", "").replace("+", "!");
         int sum = 0;
         for (char c : str.toCharArray()) {
             if (Character.isDigit(c)){
