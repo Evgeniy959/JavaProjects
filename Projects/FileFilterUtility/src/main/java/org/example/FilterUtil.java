@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FilterUtil {
@@ -12,7 +13,7 @@ public class FilterUtil {
                 "-s            Краткая статистика.%n" +
                 "-f            Полная статистика.%n");
 
-        String str = loadContent("in");
+        //String str = loadContent("in");
 
         if (args.length == 0 || args[0].equals("-h")) {
             System.out.print(help);
@@ -20,9 +21,23 @@ public class FilterUtil {
             return;
         }
         for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("-p")  && !args[i+1].equals("res") && i+1<args.length) {
-                //String str = loadContent("in");
+            if (i+1<args.length && args[i].equals("-p") && args[i+1].equals("res")) {
+                String str = loadContent("in");
                 System.out.println(str);
+                try(FileWriter writer = new FileWriter(args[i+1] + "integers.txt", false))
+                {
+                    // запись всей строки
+                    writer.write(str);
+                    // запись по символам
+//                    writer.append('\n');
+//                    writer.append('E');
+
+                    writer.flush();
+                }
+                catch(IOException ex){
+
+                    System.out.println(ex.getMessage());
+                }
                 break;
 
             }
