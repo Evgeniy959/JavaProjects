@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FilterUtil {
+    private static boolean appendMode = false;
     public static void main(String[] args) {
         final String help = String.format("FilesFilter [options] [files...]%n" +
                 "options:%n" +
@@ -13,7 +14,7 @@ public class FilterUtil {
                 "-s            Краткая статистика.%n" +
                 "-f            Полная статистика.%n");
 
-        //String str = loadContent("in");
+        String str = loadContent("in");
 
         if (args.length == 0 || args[0].equals("-h")) {
             System.out.print(help);
@@ -22,16 +23,13 @@ public class FilterUtil {
         }
         for (int i = 0; i < args.length; i++) {
             if (i+1<args.length && args[i].equals("-p") && args[i+1].equals("res")) {
-                String str = loadContent("in");
+                //String str = loadContent("in");
                 System.out.println(str);
-                try(FileWriter writer = new FileWriter(args[i+1] + "integers.txt", false))
+                if (args[i+2].equals("-a")) appendMode = true;
+                try(FileWriter writer = new FileWriter(args[i+1] + "integers.txt", appendMode))
                 {
                     // запись всей строки
                     writer.write(str);
-                    // запись по символам
-//                    writer.append('\n');
-//                    writer.append('E');
-
                     writer.flush();
                 }
                 catch(IOException ex){
@@ -41,15 +39,23 @@ public class FilterUtil {
                 break;
 
             }
-        ;
         }
     }
     public static String loadContent(String name) {
         try {
-            var is = ClassLoader.getSystemResourceAsStream("reading/" + name + ".txt");
+            var is = ClassLoader.getSystemResourceAsStream("input/" + name + ".txt");
             return new String(is.readAllBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't load message!");
+            throw new RuntimeException("Can't load file!");
+        }
+    }
+
+    public static String raadFile(String name) {
+        try {
+            var is = ClassLoader.getSystemResourceAsStream("input/" + name + ".txt");
+            return new String(is.readAllBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't load file!");
         }
     }
 }
