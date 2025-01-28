@@ -15,6 +15,7 @@ public class FilterUtil {
                 "-f            Полная статистика.%n");
 
         String str = loadContent("in");
+        String prefix = "";
 
         if (args.length == 0 || args[0].equals("-h")) {
             System.out.print(help);
@@ -22,11 +23,17 @@ public class FilterUtil {
             return;
         }
         for (int i = 0; i < args.length; i++) {
-            if (i+1<args.length && args[i].equals("-p") && args[i+1].equals("res")) {
-                //String str = loadContent("in");
+            if ( args[i].equals("-o") /*&& i+1<=args.length*/) {
+                String outputPath = args[i+1];
                 System.out.println(str);
-                if (args[i+2].equals("-a")) appendMode = true;
-                try(FileWriter writer = new FileWriter(args[i+1] + "integers.txt", appendMode))
+                if (i+2<args.length && args[i+2].equals("-a")) {
+                    appendMode = true;
+                    //if (args[i+3].equals("-o")) appendMode = true;
+                }
+                if (i+3<args.length && args[i+3].equals("-p") /*&& i+1<=args.length*/)
+                    prefix = args[i+4];
+
+                try(FileWriter writer = new FileWriter(outputPath + "/" + prefix + "integers.txt", appendMode))
                 {
                     // запись всей строки
                     writer.write(str);
@@ -35,6 +42,12 @@ public class FilterUtil {
                 catch(IOException ex){
 
                     System.out.println(ex.getMessage());
+                    //System.out.println("Введите префикс имени файла");
+                }
+                catch(IndexOutOfBoundsException ex){
+
+                    System.out.println(ex.getMessage());
+                    System.out.println("Введите префикс имени файла");
                 }
                 break;
 
