@@ -20,17 +20,15 @@ public class FilterUtil {
 
         if (args.length == 0 || args[0].equals("-h")) {
             System.out.print(help);
-            //System.out.println(str);
             return;
         }
         for (int i = 0; i < args.length; i++) {
-            if ( args[i].equals("-o") /*&& i+1<=args.length*/) {
+            if ( args[i].equals("-o") && i+1<args.length) {
                 outputPath = args[i+1];
                 System.out.println(str);
             }
             if (args[i].equals("-a")) {
                 appendMode = true;
-                //if (args[i+3].equals("-o")) appendMode = true;
             }
             if (args[i].equals("-p") && i+1<args.length)
                 prefix = args[i+1];
