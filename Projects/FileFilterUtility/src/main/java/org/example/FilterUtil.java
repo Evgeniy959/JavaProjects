@@ -16,41 +16,38 @@ public class FilterUtil {
 
         String str = loadContent("in");
         String prefix = "";
+        String outputPath = "./";
 
         if (args.length == 0 || args[0].equals("-h")) {
             System.out.print(help);
             return;
         }
         for (int i = 0; i < args.length; i++) {
-            if ( args[i].equals("-o") /*&& i+1<=args.length*/) {
-                String outputPath = args[i+1];
+            if ( args[i].equals("-o") && i+1<args.length) {
+                outputPath = args[i+1];
                 System.out.println(str);
-                if (i+2<args.length && args[i+2].equals("-a")) {
-                    appendMode = true;
-                    //if (args[i+3].equals("-o")) appendMode = true;
-                }
-                if (i+3<args.length && args[i+3].equals("-p") /*&& i+1<=args.length*/)
-                    prefix = args[i+4];
-
-                try(FileWriter writer = new FileWriter(outputPath + "/" + prefix + "integers.txt", appendMode))
-                {
-                    // запись всей строки
-                    writer.write(str);
-                    writer.flush();
-                }
-                catch(IOException ex){
-
-                    System.out.println(ex.getMessage());
-                    //System.out.println("Введите префикс имени файла");
-                }
-                catch(IndexOutOfBoundsException ex){
-
-                    System.out.println(ex.getMessage());
-                    System.out.println("Введите префикс имени файла");
-                }
-                break;
-
             }
+            if (args[i].equals("-a")) {
+                appendMode = true;
+            }
+            if (args[i].equals("-p") && i+1<args.length)
+                prefix = args[i+1];
+        }
+        try(FileWriter writer = new FileWriter(outputPath + "/" + prefix + "integers.txt", appendMode))
+        {
+            // запись всей строки
+            writer.write(str);
+            writer.flush();
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+            //System.out.println("Введите префикс имени файла");
+        }
+        catch(IndexOutOfBoundsException ex){
+
+            System.out.println(ex.getMessage());
+            System.out.println("Введите префикс имени файла");
         }
     }
     public static String loadContent(String name) {
