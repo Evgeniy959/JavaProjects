@@ -19,7 +19,6 @@ public class FilterUtil {
 
         if (args.length == 0 || args[0].equals("-h")) {
             System.out.print(help);
-            //System.out.println(str);
             return;
         }
         for (int i = 0; i < args.length; i++) {
