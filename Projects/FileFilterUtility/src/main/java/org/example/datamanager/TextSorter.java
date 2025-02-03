@@ -76,22 +76,22 @@ public class TextSorter {
         for(String line : lines){
             if (DataParser.isInteger(line)) {
                 type = "integers";
-                builderLines.append(String.format(line+"%n"));
+                //builderLines.append(String.format(line+"%n"));
                 //for (int i = 0; i < lines.length; i++) {
                     System.out.println(lines.get(1));
                 //}
                 //integerStat.update(line);
             } else if (DataParser.isFloat(line)) {
                 type = "floats";
-                builderLines.append(String.format(line+"%n"));
+                //builderLines.append(String.format(line+"%n"));
                 //floatStat.update(line);
             } else {
                 type = "strings";
-                builderLines.append(String.format(line+"%n"));
+                //builderLines.append(String.format(line+"%n"));
                 //stringStat.update(line);
             }
             try {
-                writeLine(type, builderLines.toString());
+                writeLine(type, line);
             } catch (IOException e) {
                 System.err.println("Не удалось записать строку в файл: " + e.getMessage());
             }
